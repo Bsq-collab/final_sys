@@ -1,0 +1,54 @@
+﻿Bayan Berri
+Brian Lim
+Gabi Newman
+
+
+I. Description of the project
+   A. This project will be a quiz bowl style trivia game. A single main server will handle the files containing questions/answers as well as the creation of hosting servers, which will run games for remote clients and will communicate with the main server to get questions/answers as needed. Whichever client buzzes in (presses the enter key) first will lock out the other clients as it is prompted to answer the question. If it gives the correct answer to the hosting server, it gets pointz. If it does not, the other player(s) get a chance to buzz in and answer.   
+II. User Interface
+   A. This will be a terminal based game with multiple choice questions. The main server will require no user input but will print information about the hosting server and about changes to the question/answer data. The hosting server(s) will require no user input but will print output similar to that of a remote client that is in game. Clients can connect to the main server in order to make changes/additions to the question/answer data and to request a new hosting server with parameters such as game size and server password. Clients may then connect to the hosting server, where they can vote to start the game. Once the game starts, a question will displayed character by character until a player decides to buzz. When the player presses enter to buzz, they will be prompted to type an answer and earn points if they give a correct answer in time. The player will also be given a list of all connected players and their scores. 
+III. Technical Design
+   A. Allocating Memory
+      1. We’ll allocate memory to keep track of the number of points each player has. For the MVP each question will be worth one point— we will change this if we feel the need to. 
+   B. Working with files
+      1. We will have a file full of questions. There will be a new line between each new question. 
+      2. We will have a file full of the answers that correspond to the questions. There will be a new line between each new question
+      3. We will have four separate answers for each answer choice (A.txt B.txt C.txt D.txt)
+      4. Another feature we may add if we have time is the option of users creating their own questions. 
+   C. Processes (fork, exec etc)
+      1. The main server will fork to make hosts. 
+   D. Signals
+      1. We’ll utilize SIGUSR1 to check who buzzes in first. We’d like to have the enter key correspond to buzzing in. 
+   E. pipes(named and unnamed).
+      1. The host server is just a subprocess of the main server and will be on the same computer. The host can use pipes from the main server to get questions/answers as needed.
+   F. Networking
+      1. Clients will connect to the main server to make changes to the question/answer data or to request a new host. Clients will connect to hosts to play the game.
+IV. Algorithms
+   A. We will include a shuffling system for questions so that not every game is exactly the same. We’ll shuffle a list of numbers and return the number we receive (and remove it so that it’s not reused). And read the corresponding question from the question file.
+V. Responsibilities
+   A. Bayan: 
+      1. Default question files (should be done by thursday)
+      2. Check if answer is correct and user input
+      3. Keep track of points
+      4. Enter key buzzer
+      5. Shuffle 
+   B. Gabi:
+      1. Creation of host servers
+      2. Player ready system
+      3. Host server termination
+   C. Brian:
+      1. Client interface with the main server
+      2. Modification of question/server files
+      3. Requests for hosts with parameters
+   D. Together because teamwork makes the dream work: Networking after break
+VI. Timeline
+   1. Have sample questions ready in separate files: December 28
+   2. Have checking answers work: December 29
+   3. Add points: December 30
+   4. Incorporate simple buzzer system: January 2 
+   5. Shuffle: January 4
+   6. Incorporate a way for users to join a session/game (Minimum 2 players) A sign up system (After learning more about networking): January 6
+   7. Write your own questions: January 8
+   8. Adding point values depending on question difficulty: January 12
+   9. Debugging: Every Day!
+   10. Everything should work by the deadline: January 19
