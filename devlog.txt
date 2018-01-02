@@ -41,6 +41,3 @@ tales of wisdom gained...
 bayanB -- 2018-01-01 15:26:57
 Added 4 sample questions for testing purposes and answer choices in each of the corresponding files. Also added log.sh if you type this in terminal you will have a timestamped log in the devlog: $ firstL "did stuff" (bayanB "did stuff")
 
-
-
-
