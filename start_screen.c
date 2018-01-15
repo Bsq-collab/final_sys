@@ -1,7 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "final.h"
+#include <ctype.h>
 
-int get_int();
+/*int get_int();
 
 int get_num_players(){
   int n;
@@ -29,3 +29,14 @@ int get_int(){
   printf("%d\n", n);
   return 0;
   }*/
+
+int main(){
+  int num_players=0;
+
+  while((!isdigit(num_players))&&(num_players<2 ||num_players>4)){
+    printf("How many players?(2-4)\n");
+    scanf("%d",&num_players);
+    printf("number of players: %d\n",num_players);
+  }
+
+}
