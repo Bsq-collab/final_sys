@@ -29,22 +29,84 @@ int get_int(){
   printf("%d\n", n);
   return 0;
   }*/
+void readfile(char* fileName, char* contents,int size ){
+
+  int fd =open(fileName, O_RDONLY);
+  read(fd, contents, size);
+}
+
+char ** parse_new_line(char* line,char * parse_on){
+  char ** retans = malloc(256* sizeof(char*));
+  int i=0;
+  while(line){
+    retans[i]=strsep(&line,parse_on);
+    i+=1;
+  }
+  return retans;
+}
+
+void print_lines(char** lines, int number_of_lines, int line_num){
+  int i=line_num;
+  while(i<number_of_lines+line_num){
+    printf("%s\n",lines[i]);
+    i+=1;
+  }
+  printf("\n\n\n\n");
+}
 
 int main(){
-  int num_players=0;
+  //for while loop
+  int current_question=0;
+  int current_answer=0;
+  //for the questions
+  char contents[1000];
+  char ** questions;
+  //for the answers
+  char choices[1000];
+  char ** answers;
+  //for the key
+  char key[1000];
+  char ** parsed_key;
+  //reading:
+  readfile("question.txt",contents,1000);
+  readfile("A.txt",choices,1000);
+  readfile("correct.txt",key,1000);
+  //parsing:
+  questions = parse_new_line(contents,"\n");
+  answers = parse_new_line(choices,"\n");
+  parsed_key = parse_new_line(key,"\n");
+
+  while(current_question<4){
+    print_lines(questions,1,current_question);
+    print_lines(answers,4,current_answer);
+    current_question++;
+    current_answer+=4;
+
+  }
+
+//gets number of players
+  /*int num_players=0;
   while(num_players<2 ||  num_players>4){
     printf("How many players?(2-4)\n");
     scanf("%d",&num_players);
     printf("number of players: %d\n",num_players);
-  }
-
+    }*/
+  /*
   int i=1;
   char s[256][256];
-
+  //gets players names
   while (i<=num_players){
     printf("\n\n what's player %d's name? \n",i);
     scanf("%s",s[i-1]);
     printf("player %d: %s\n",i, s[i-1]);
     i++;
-  }
+  }*/
+  /* char start[256];
+  memset(start,0,256);
+
+  while(strcmp(start,"start")){
+    printf("type start to start:\n");
+    scanf("%s",start);
+    }*/
+
 }
