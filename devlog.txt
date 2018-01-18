@@ -47,3 +47,6 @@ added file called final.h that includes all the include statements i can find
 bayanB -- 2018-01-15 11:13:59
 asks user how many players and reads user answer
 
+bayanB -- 2018-01-18 15:13:50
+asks for how many players and players names
+

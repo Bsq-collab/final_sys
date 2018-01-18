@@ -32,11 +32,19 @@ int get_int(){
 
 int main(){
   int num_players=0;
-
-  while((!isdigit(num_players))&&(num_players<2 ||num_players>4)){
+  while(num_players<2 ||  num_players>4){
     printf("How many players?(2-4)\n");
     scanf("%d",&num_players);
     printf("number of players: %d\n",num_players);
   }
 
+  int i=1;
+  char s[256][256];
+
+  while (i<=num_players){
+    printf("\n\n what's player %d's name? \n",i);
+    scanf("%s",s[i-1]);
+    printf("player %d: %s\n",i, s[i-1]);
+    i++;
+  }
 }
