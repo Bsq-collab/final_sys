@@ -51,18 +51,25 @@ void print_lines(char** lines, int number_of_lines, int line_num){
     printf("%s\n",lines[i]);
     i+=1;
   }
-  printf("\n\n\n\n");
+  printf("\n");
 }
-
+void get_user_input(char user_answer[4]){
+  //char user_answer[2];
+  printf("Your answer:\n");
+  fgets(user_answer, 4, stdin);
+  printf("user_answer: %s\n",user_answer);
+  //return user_answer;
+}
 int main(){
-  //gets number of players
+  /*  //gets number of players
   int num_players=0;
   num_players=get_num_players();
   while(num_players<2 ||  num_players>4){
     printf("How many players?(2-4)\n");
     scanf("%d",&num_players);
     printf("number of players: %d\n",num_players);
-  }
+    }*/
+  /*
   //asks for player names
   int i=1;
   char s[256][256];
@@ -73,13 +80,15 @@ int main(){
     printf("player %d: %s\n",i, s[i-1]);
     i++;
   }
-  char start[256];
+  */
+  /*//add a directions section if time. so that this is useful...
+char start[256];
   memset(start,0,256);
 
   while(strcmp(start,"start")){
     printf("type start to start:\n");
     scanf("%s",start);
-  }
+    }*/
   //for while loop
   int current_question=0;
   int current_answer=0;
@@ -92,6 +101,8 @@ int main(){
   //for the key
   char key[1000];
   char ** parsed_key;
+
+  char user_answer[4];
   //reading:
   readfile("question.txt",contents,1000);
   readfile("A.txt",choices,1000);
@@ -104,6 +115,8 @@ int main(){
   while(current_question<4){
     print_lines(questions,1,current_question);
     print_lines(answers,4,current_answer);
+    get_user_input(user_answer);
+    printf("useranswer: %s\n",user_answer );
     current_question++;
     current_answer+=4;
 
