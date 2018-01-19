@@ -50,3 +50,6 @@ asks user how many players and reads user answer
 bayanB -- 2018-01-18 15:13:50
 asks for how many players and players names
 
+bayanB -- 2018-01-19 15:00:47
+changed the format of the question files so that there is one file for all choices and a file for correct answers and a file for the question. I coded the part where it prints out one line at a time from the question with the answer choices beneath it. 
+
