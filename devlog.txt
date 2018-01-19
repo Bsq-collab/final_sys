@@ -56,3 +56,6 @@ changed the format of the question files so that there is one file for all choic
 limB -- 2018-01-19 15:35:42
 server parameter and q_and_a asking and answering
 
+bayanB -- 2018-01-19 15:32:45
+Worked on getting user input for the answer
+
