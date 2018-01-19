@@ -14,3 +14,5 @@
 #include <sys/socket.h>
 #include <netdb.h>
 #include <time.h>
+
+#define PORT_NUM 6743
