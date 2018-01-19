@@ -33,11 +33,14 @@ char ask(char * q_and_a) {
 struct host_info suggest_mkhost() {
   struct host_info mkhost_info;
   char y_or_n;
+  
   printf("How many players?\n");
-  //scanf("%d", &(mkhost_info.num_of_players));
+  scanf(" %d", &(mkhost_info.num_of_players));
+  
   printf("Do you want to have a password? (y/n)\n");
-  scanf("%c", &y_or_n);
-  if ( y_or_n == 'y' ) {
+  scanf(" %c", &y_or_n);
+  
+  if ( y_or_n == 'y' || 1 ) {
     mkhost_info.has_password = 1;
     printf("Password:\n");
     scanf("%s", mkhost_info.password);
@@ -46,6 +49,8 @@ struct host_info suggest_mkhost() {
   } 
   return mkhost_info;
 }
+
+
 
 int main() {
   //printf("@%c\n", ask("THIS IS A SAMPLE QUESTION"));
