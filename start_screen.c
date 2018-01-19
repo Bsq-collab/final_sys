@@ -1,7 +1,7 @@
 #include "final.h"
 #include <ctype.h>
 
-/*int get_int();
+int get_int();
 
 int get_num_players(){
   int n;
@@ -55,6 +55,31 @@ void print_lines(char** lines, int number_of_lines, int line_num){
 }
 
 int main(){
+  //gets number of players
+  int num_players=0;
+  num_players=get_num_players();
+  while(num_players<2 ||  num_players>4){
+    printf("How many players?(2-4)\n");
+    scanf("%d",&num_players);
+    printf("number of players: %d\n",num_players);
+  }
+  //asks for player names
+  int i=1;
+  char s[256][256];
+  //gets players names
+  while (i<=num_players){
+    printf("\n\n what's player %d's name? \n",i);
+    scanf("%s",s[i-1]);
+    printf("player %d: %s\n",i, s[i-1]);
+    i++;
+  }
+  char start[256];
+  memset(start,0,256);
+
+  while(strcmp(start,"start")){
+    printf("type start to start:\n");
+    scanf("%s",start);
+  }
   //for while loop
   int current_question=0;
   int current_answer=0;
@@ -84,29 +109,6 @@ int main(){
 
   }
 
-//gets number of players
-  /*int num_players=0;
-  while(num_players<2 ||  num_players>4){
-    printf("How many players?(2-4)\n");
-    scanf("%d",&num_players);
-    printf("number of players: %d\n",num_players);
-    }*/
-  /*
-  int i=1;
-  char s[256][256];
-  //gets players names
-  while (i<=num_players){
-    printf("\n\n what's player %d's name? \n",i);
-    scanf("%s",s[i-1]);
-    printf("player %d: %s\n",i, s[i-1]);
-    i++;
-  }*/
-  /* char start[256];
-  memset(start,0,256);
 
-  while(strcmp(start,"start")){
-    printf("type start to start:\n");
-    scanf("%s",start);
-    }*/
 
 }
