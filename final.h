@@ -15,4 +15,4 @@
 #include <netdb.h>
 #include <time.h>
 
-#define PORT_NUM 6743
+#define PORT_NUM "6743"
