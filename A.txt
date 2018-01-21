@@ -1,16 +1,16 @@
-A Basic
-B acidic
-C neutral
-D in equilibrium
-A positive, positive
-B positive, negative
-C negative, positive
-D negative, negative
-A 3
-B 6
-C 9
-D 15
-A epithelial
-B connective
-C nervous
-D muscle
+1 Basic
+2 acidic
+3 neutral
+4 in equilibrium
+1 positive, positive
+2 positive, negative
+3 negative, positive
+4 negative, negative
+1 3
+2 6
+3 9
+4 15
+1 epithelial
+2 connective
+3 nervous
+4 muscle

@@ -53,13 +53,28 @@ void print_lines(char** lines, int number_of_lines, int line_num){
   }
   printf("\n");
 }
-void get_user_input(char user_answer[4]){
-  //char user_answer[2];
-  printf("Your answer:\n");
-  fgets(user_answer, 4, stdin);
-  printf("user_answer: %s\n",user_answer);
-  //return user_answer;
+int get_line(char** lines,int number_of_lines, int line_num){
+  int i=line_num;
+  int correct=0;
+  while(i<number_of_lines+line_num){
+    correct=atoi(lines[i]);
+    printf("HERES THE RIGHT ANS:%d\n",atoi(lines[i]));
+    i+=1;
+  }
+  printf("\n");
+  return correct;
 }
+int get_user_num(){
+  int n;
+  printf("your answer(1-4):\n");
+  n = get_int();
+  while(n > 4 || n < 1){
+    printf("Invalid input. Please try again.\n");
+    n = get_int();
+  }
+  return n;
+}
+
 int main(){
   /*  //gets number of players
   int num_players=0;
@@ -102,7 +117,6 @@ char start[256];
   char key[1000];
   char ** parsed_key;
 
-  char user_answer[4];
   //reading:
   readfile("question.txt",contents,1000);
   readfile("A.txt",choices,1000);
@@ -113,10 +127,26 @@ char start[256];
   parsed_key = parse_new_line(key,"\n");
 
   while(current_question<4){
+
     print_lines(questions,1,current_question);
     print_lines(answers,4,current_answer);
-    get_user_input(user_answer);
-    printf("useranswer: %s\n",user_answer );
+
+    int LINE;
+    LINE = get_line(parsed_key,1,current_question);
+    // printf("\n\n\n\nLINE:_%d_\n\n",LINE);
+
+    int user_input = 0;
+    user_input = get_user_num();
+    printf("YOU PUT THIS AS YOUR ANSWER>: %d\n", user_input);
+    printf("user_input:_%d_\n\n",user_input);
+
+    if(user_input==LINE){
+      printf("\n\n\nCORRECT!!!!!!!!!!!!!!!!!!!!!!\n\n\n\n");
+    }
+    else{
+      printf("\n\nINCORRECT\n\n The correct answer is: %d\n\n",LINE);
+    }
+
     current_question++;
     current_answer+=4;
 
