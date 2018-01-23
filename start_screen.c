@@ -92,12 +92,19 @@ int old_main(){
     scanf("%d",&num_players);
     printf("number of players: %d\n",num_players);
   }
-
+  int points[num_players];
+  memset(points,0,num_players);
+  int clearer=0;
+  while(clearer<4){
+    points[clearer]=0;
+    clearer+=1;
+  }
+  printf("points 0: %d\t 1: %d\t 2: %d\t\n",points[0],points[1],points[2]);
   //asks for player names
-  int i=1;
-  char s[256][256];
+  //int i=1;
+  //char s[256][256];
   //gets players names
-  while (i<=num_players){
+  /* while (i<=num_players){
     printf("\n\n what's player %d's name? \n",i);
     scanf("%s",s[i-1]);
     printf("player %d: %s\n",i, s[i-1]);
@@ -111,7 +118,7 @@ int old_main(){
   while(strcmp(start,"start")){
     printf("type start to start:\n");
     scanf("%s",start);
-  }
+  }*/
   //for while loop
   int current_question=0;
   int current_answer=0;
@@ -134,7 +141,7 @@ int old_main(){
   answers = parse_new_line(choices,"\n");
   parsed_key = parse_new_line(key,"\n");
 
-  while(current_question<4){
+  while(current_question<10){
 
     print_lines(questions,1,current_question);
     print_lines(answers,4,current_answer);
@@ -150,6 +157,13 @@ int old_main(){
 
     if(user_input==LINE){
       printf("\n\n\nCORRECT!!!!!!!!!!!!!!!!!!!!!!\n\n\n\n");
+      points[0]+=100;
+      clearer=0;
+      while(clearer<num_players){
+        printf("player %d: %d\t", clearer+1, points[clearer]);
+        clearer+=1;
+      }
+      printf("\n");
     }
     else{
       printf("\n\nINCORRECT\n\n The correct answer is: %d\n\n",LINE);
@@ -159,7 +173,5 @@ int old_main(){
     current_answer+=4;
 
   }
-
-
 
 }
