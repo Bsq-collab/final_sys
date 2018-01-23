@@ -1,5 +1,5 @@
 #include "final.h"
-#include <ctype.h>
+
 
 int get_int();
 
@@ -23,12 +23,6 @@ int get_int(){
   return n;
 }
 
-/*int main(){
-  int n;
-  n = get_num_players();
-  printf("%d\n", n);
-  return 0;
-  }*/
 void readfile(char* fileName, char* contents,int size ){
 
   int fd =open(fileName, O_RDONLY);
