@@ -1,4 +1,5 @@
 #include "networking.h"
+#include "../final.h"
 
 void process(char *s);
 void subserver(int from_client);
@@ -65,7 +66,7 @@ void subserver(int client_socket) {
   close(client_socket);
   exit(0);
 }
-
+/*
 void process(char * s) {
   while (*s) {
     if (*s >= 'a' && *s <= 'z')
@@ -75,3 +76,4 @@ void process(char * s) {
     s++;
   }
 }
+*/

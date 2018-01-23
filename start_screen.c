@@ -75,16 +75,17 @@ int get_user_num(){
   return n;
 }
 
-int main(){
-  /*  //gets number of players
+char * process(char * s){
+  char out[256];
+  //gets number of players
   int num_players=0;
   num_players=get_num_players();
   while(num_players<2 ||  num_players>4){
     printf("How many players?(2-4)\n");
     scanf("%d",&num_players);
     printf("number of players: %d\n",num_players);
-    }*/
-  /*
+  }
+
   //asks for player names
   int i=1;
   char s[256][256];
@@ -95,15 +96,15 @@ int main(){
     printf("player %d: %s\n",i, s[i-1]);
     i++;
   }
-  */
-  /*//add a directions section if time. so that this is useful...
-char start[256];
+
+  //add a directions section if time. so that this is useful...
+  char start[256];
   memset(start,0,256);
 
   while(strcmp(start,"start")){
     printf("type start to start:\n");
     scanf("%s",start);
-    }*/
+  }
   //for while loop
   int current_question=0;
   int current_answer=0;

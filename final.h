@@ -25,6 +25,7 @@ char ** parse_new_line(char* line,char * parse_on);
 void print_lines(char** lines, int number_of_lines, int line_num);
 int get_line(char** lines,int number_of_lines, int line_num);
 int get_user_num();
+char * process(char * s);
 
 //Lim_Player fxn names:
 void slow_print(char * str);
