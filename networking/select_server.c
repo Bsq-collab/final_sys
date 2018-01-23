@@ -1,7 +1,7 @@
 #include "networking.h"
 #include "../final.h"
 
-void process(char *s);
+void process(int client_socket, char * buffer, size_t buffersize);
 void subserver(int from_client);
 
 int main() {
@@ -50,30 +50,114 @@ int main() {
   }
 }
 
+
 void subserver(int client_socket) {
   char buffer[BUFFER_SIZE];
+  char output[BUFFER_SIZE];
 
   //for testing client select statement
   strncpy(buffer, "hello client", sizeof(buffer));
   write(client_socket, buffer, sizeof(buffer));
+  //gets number of players
+  int num_players=0;
+  while(num_players<2 ||  num_players>4){
+    sprintf(output, "How many players? (2,3,4)\n");
+    write(client_socket,output,sizeof(output));
+    process(client_socket, buffer, sizeof(buffer));
+    sscanf(buffer,"%d",&num_players);
+    sprintf(output,"number of players: %d\n",num_players);
+    write(client_socket,output,sizeof(output));
+  }
 
+  //asks for player names
+  int i=1;
+  char s[256][256];
+  //gets players names
+  while (i<=num_players){
+    sprintf(output,"\n\n what's player %d's name? \n",i);
+    write(client_socket,output,sizeof(output));
+    process(client_socket, buffer, sizeof(buffer));
+    sscanf(buffer,"%s",s[i-1]);
+    sprintf(output,"player %d: %s\n",i, s[i-1]);
+    write(client_socket, output, sizeof(output));
+    i++;
+  }
+
+  //add a directions section if time. so that this is useful...
+  char start[256];
+  memset(start,0,256);
+
+  while(strcmp(start,"start")){
+    sprintf(output,"type start to start:\n");
+    write(client_socket,output,sizeof(output));
+    process(client_socket, buffer, sizeof(buffer));
+    sscanf(buffer,"%s",start);
+  }/*
+  //for while loop
+  int current_question=0;
+  int current_answer=0;
+  //for the questions
+  char contents[1000];
+  char ** questions;
+  //for the answers
+  char choices[1000];
+  char ** answers;
+  //for the key
+  char key[1000];
+  char ** parsed_key;
+
+  //reading:
+  readfile("question.txt",contents,1000);
+  readfile("A.txt",choices,1000);
+  readfile("correct.txt",key,1000);
+  //parsing:
+  questions = parse_new_line(contents,"\n");
+  answers = parse_new_line(choices,"\n");
+  parsed_key = parse_new_line(key,"\n");
+
+  while(current_question<4){
+
+    sprint_lines(output,questions,1,current_question);
+    sprint_lines(output,answers,4,current_answer);
+    write(client_socket, output, sizeof(output));
+
+    int LINE;
+    LINE = get_line(parsed_key,1,current_question);
+    // printf("\n\n\n\nLINE:_%d_\n\n",LINE);
+
+    int user_input = 0;
+    user_input = get_user_num();
+    sprintf(output,"YOU PUT THIS AS YOUR ANSWER>: %d\n", user_input);
+    sprintf(output,"user_input:_%d_\n\n",user_input);
+    write(client_socket, output, sizeof(output));
+
+    if(user_input==LINE){
+      printf("\n\n\nCORRECT!!!!!!!!!!!!!!!!!!!!!!\n\n\n\n");
+    }
+    else{
+      printf("\n\nINCORRECT\n\n The correct answer is: %d\n\n",LINE);
+    }
+
+    current_question++;
+    current_answer+=4;
+
+  }*/
+
+
+
+  /*
   while (read(client_socket, buffer, sizeof(buffer))) {
 
     printf("[subserver %d] received: [%s]\n", getpid(), buffer);
     process(buffer);
     write(client_socket, buffer, sizeof(buffer));
   }//end read loop
+  */
   close(client_socket);
   exit(0);
 }
-/*
-void process(char * s) {
-  while (*s) {
-    if (*s >= 'a' && *s <= 'z')
-      *s = ((*s - 'a') + 13) % 26 + 'a';
-    else  if (*s >= 'A' && *s <= 'Z')
-      *s = ((*s - 'a') + 13) % 26 + 'a';
-    s++;
-  }
+
+void process(int client_socket, char * buffer, size_t buffersize) {
+  read(client_socket, buffer, buffersize);
+  printf("[subserver %d] received: [%s]\n", getpid(), buffer);
 }
-*/

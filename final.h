@@ -19,13 +19,13 @@
 #define PORT_NUM "6743"
 
 //Start_screen fxn names:
+int get_num_players();
 int get_int();
 void readfile(char* fileName, char* contents,int size );
 char ** parse_new_line(char* line,char * parse_on);
 void print_lines(char** lines, int number_of_lines, int line_num);
 int get_line(char** lines,int number_of_lines, int line_num);
 int get_user_num();
-char * process(char * s);
 
 //Lim_Player fxn names:
 void slow_print(char * str);

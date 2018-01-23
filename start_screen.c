@@ -1,5 +1,5 @@
 #include "final.h"
-
+#include <ctype.h>
 
 int get_int();
 
@@ -23,6 +23,12 @@ int get_int(){
   return n;
 }
 
+/*int main(){
+  int n;
+  n = get_num_players();
+  printf("%d\n", n);
+  return 0;
+  }*/
 void readfile(char* fileName, char* contents,int size ){
 
   int fd =open(fileName, O_RDONLY);
@@ -47,6 +53,14 @@ void print_lines(char** lines, int number_of_lines, int line_num){
   }
   printf("\n");
 }
+void sprint_lines(char * output, char** lines, int number_of_lines, int line_num){
+  int i=line_num;
+  while(i<number_of_lines+line_num){
+    sprintf(output,"%s\n",lines[i]);
+    i+=1;
+  }
+  sprintf(output,"\n");
+}
 int get_line(char** lines,int number_of_lines, int line_num){
   int i=line_num;
   int correct=0;
@@ -69,8 +83,7 @@ int get_user_num(){
   return n;
 }
 
-char * process(char * s){
-  char out[256];
+int old_main(){
   //gets number of players
   int num_players=0;
   num_players=get_num_players();
