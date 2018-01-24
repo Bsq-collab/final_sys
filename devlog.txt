@@ -83,3 +83,6 @@ The game is (net)working now
 bayanB -- 2018-01-24 17:55:19
 fixed the trash memory problem (the files were in the above directory not networking/ 
 
+limB -- 2018-01-24 18:27:01
+fixed answering system
+
