@@ -74,3 +74,6 @@ copy over and test Mr. Dw's networking code
 limB -- 2018-01-22 22:13:22
 Integrated (most) of the application into the network stuff
 
+gabiN -- 2018-01-24 00:55:38
+create a seperate branch named 'integrated' in order to avoid major disaster while attempting to integrate the networking code with the existing code of the game. this includes combining both of their respective header files, as well as beginning to modify the get num players function in order to function with sockets. then began to write setup functions on both server and client ends.
+
