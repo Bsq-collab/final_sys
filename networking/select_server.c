@@ -1,5 +1,6 @@
 #include "networking.h"
 #include "../final.h"
+#include "../start_screen.c"
 
 void process(int client_socket, char * buffer, size_t buffersize);
 void subserver(int from_client);
@@ -92,7 +93,7 @@ void subserver(int client_socket) {
     write(client_socket,output,sizeof(output));
     process(client_socket, buffer, sizeof(buffer));
     sscanf(buffer,"%s",start);
-  }/*
+  }
   //for while loop
   int current_question=0;
   int current_answer=0;
@@ -117,31 +118,32 @@ void subserver(int client_socket) {
 
   while(current_question<4){
 
-    sprint_lines(output,questions,1,current_question);
-    sprint_lines(output,answers,4,current_answer);
-    write(client_socket, output, sizeof(output));
+    print_lines(client_socket,questions,1,current_question);
+    print_lines(client_socket,answers,4,current_answer);
 
     int LINE;
-    LINE = get_line(parsed_key,1,current_question);
+    LINE = get_line(client_socket,parsed_key,1,current_question);\
     // printf("\n\n\n\nLINE:_%d_\n\n",LINE);
 
     int user_input = 0;
-    user_input = get_user_num();
+    user_input = get_user_num(client_socket);
     sprintf(output,"YOU PUT THIS AS YOUR ANSWER>: %d\n", user_input);
+    write(client_socket, output, sizeof(output));
     sprintf(output,"user_input:_%d_\n\n",user_input);
     write(client_socket, output, sizeof(output));
 
     if(user_input==LINE){
-      printf("\n\n\nCORRECT!!!!!!!!!!!!!!!!!!!!!!\n\n\n\n");
+      sprintf(output,"\n\n\nCORRECT!!!!!!!!!!!!!!!!!!!!!!\n\n\n\n");
     }
     else{
-      printf("\n\nINCORRECT\n\n The correct answer is: %d\n\n",LINE);
+      sprintf(output,"\n\nINCORRECT\n\n The correct answer is: %d\n\n",LINE);
     }
+    write(client_socket, output, sizeof(output));
 
     current_question++;
     current_answer+=4;
 
-  }*/
+  }
 
 
 

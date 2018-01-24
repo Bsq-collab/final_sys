@@ -23,9 +23,9 @@ int get_num_players();
 int get_int();
 void readfile(char* fileName, char* contents,int size );
 char ** parse_new_line(char* line,char * parse_on);
-void print_lines(char** lines, int number_of_lines, int line_num);
-int get_line(char** lines,int number_of_lines, int line_num);
-int get_user_num();
+void print_lines(int client_socket, char** lines, int number_of_lines, int line_num);
+int get_line(int client_socket, char** lines,int number_of_lines, int line_num);
+int get_user_num(int client_socket);
 
 //Lim_Player fxn names:
 void slow_print(char * str);
