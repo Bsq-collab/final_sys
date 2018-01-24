@@ -1,25 +1,25 @@
 #include "final.h"
 #include <ctype.h>
 
-int get_int();
+int get_int(int client_socket);
 
-int get_num_players(){
-  int n;
-  printf("Hello! Welcome to our beautiful final project\n");
-  printf("How many players? (2 to 4 players)\n");
-  n = get_int();
-  while(n > 4 || n < 2){
-    printf("Invalid input. Please try again.\n");
-    n = get_int();
-  }
-  return n;
-}
+// int get_num_players(){
+//   int n;
+//   printf("Hello! Welcome to our beautiful final project\n");
+//   printf("How many players? (2 to 4 players)\n");
+//   n = get_int();
+//   while(n > 4 || n < 2){
+//     printf("Invalid input. Please try again.\n");
+//     n = get_int();
+//   }
+//   return n;
+// }
 
-int get_int(){
-  char buff[256];
+int get_int(int client_socket){
+  char buffer[256];
   int n;
-  fgets(buff, 256, stdin);
-  n = strtol(buff, NULL, 10);
+  process(client_socket, buffer, sizeof(buffer));
+  sscanf(buffer,"%d",&n);
   return n;
 }
 
@@ -78,13 +78,18 @@ int get_user_num(int client_socket){
   int n;
   sprintf(output,"your answer(1-4):\n");
   write(client_socket, output, sizeof(output));
-  n = get_int();
+  n = get_int(client_socket);
   while(n > 4 || n < 1){
     sprintf(output,"Invalid input. Please try again.\n");
     write(client_socket, output, sizeof(output));
-    n = get_int();
+    n = get_int(client_socket);
   }
   return n;
+}
+
+void process(int client_socket, char * buffer, size_t buffersize) {
+  read(client_socket, buffer, buffersize);
+  printf("[subserver %d] received: [%s]\n", getpid(), buffer);
 }
 
 //

@@ -159,8 +159,3 @@ void subserver(int client_socket) {
   close(client_socket);
   exit(0);
 }
-
-void process(int client_socket, char * buffer, size_t buffersize) {
-  read(client_socket, buffer, buffersize);
-  printf("[subserver %d] received: [%s]\n", getpid(), buffer);
-}
