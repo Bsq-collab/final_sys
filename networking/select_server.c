@@ -84,6 +84,7 @@ void subserver(int client_socket) {
     i++;
   }
   /*
+    leave it commented out!!
     ------Unnecessary at the moment-------
   //add a directions section if time. so that this is useful...
   char start[256];
