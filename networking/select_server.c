@@ -126,15 +126,18 @@ void subserver(int client_socket) {
 
     int LINE;
     LINE = get_line(client_socket,parsed_key,1,current_question);\
-    // printf("\n\n\n\nLINE:_%d_\n\n",LINE);
+
 
     int user_input = 0;
     user_input = get_user_num(client_socket);
+
     sprintf(output,"YOU PUT THIS AS YOUR ANSWER>: %d\n", user_input);
     write(client_socket, output, sizeof(output));
+
     sprintf(output,"user_input:_%d_\n\n",user_input);
     write(client_socket, output, sizeof(output));
-
+    process(client_socket, buffer, sizeof(buffer));
+    sscanf(buffer,"%d",&user_input);
     if(user_input==LINE){
       sprintf(output,"\n\n\nCORRECT!!!!!!!!!!!!!!!!!!!!!!\n\n\n\n");
     }
