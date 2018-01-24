@@ -83,7 +83,8 @@ void subserver(int client_socket) {
     write(client_socket, output, sizeof(output));
     i++;
   }
-
+  /*
+    ------Unnecessary at the moment-------
   //add a directions section if time. so that this is useful...
   char start[256];
   memset(start,0,256);
@@ -94,6 +95,7 @@ void subserver(int client_socket) {
     process(client_socket, buffer, sizeof(buffer));
     sscanf(buffer,"%s",start);
   }
+  */
   //for while loop
   int current_question=0;
   int current_answer=0;
@@ -108,9 +110,9 @@ void subserver(int client_socket) {
   char ** parsed_key;
 
   //reading:
-  readfile("question.txt",contents,1000);
-  readfile("A.txt",choices,1000);
-  readfile("correct.txt",key,1000);
+  readfile("../question.txt",contents,1000);
+  readfile("../A.txt",choices,1000);
+  readfile("../correct.txt",key,1000);
   //parsing:
   questions = parse_new_line(contents,"\n");
   answers = parse_new_line(choices,"\n");
@@ -144,8 +146,6 @@ void subserver(int client_socket) {
     current_answer+=4;
 
   }
-
-
 
   /*
   while (read(client_socket, buffer, sizeof(buffer))) {
