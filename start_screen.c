@@ -40,12 +40,7 @@ void parse_new_line(char ** buffer, char* line, char * parse_on){
   int i=0;
   char * temp;
   while(temp = strsep(&line,parse_on)){
-    // sscanf(temp,"%s",buffer[i]);
-    // sprintf(buffer[i], "%s", temp);
-    // buffer[i] = strdup(temp);
     strcpy(buffer[i], temp);
-    printf("######%s\n", buffer[i]);
-    // strncpy(buffer[i], strsep(&line,parse_on), 256);
     i+=1;
   }
   printf("&&&&&%s\n", temp);

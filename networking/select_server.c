@@ -105,29 +105,35 @@ get_q_and_a(questions, answers, parsed_key);
 	    }
 	  }
           else if (ready && current_question < 10)  {
-	    int answer_user=0;
+	    int answer_user=-1;
 	    sscanf(ans_buf,"%d\n",&answer_user);
 	    printf("@@@@@@@@@\n");
-            strcpy(buffer, questions[current_question]);
-            
-            broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer));
-            strcpy(buffer, answers[current_question]);
-            
-            broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer));
-	    strcpy(ans_buf, parsed_key[current_question]);
-           
+
+	      
 	    if(answer_user==atoi(parsed_key[current_question])){
 	      strcpy(buffer, "GOOD WOORK\n");
 	      printf("buffer=====:%s\n",buffer);
 	      broadcast(client_socket,NUM_PLAYERS, buffer,sizeof(buffer));
+	      printf("CURRENT QUESTION: %d",current_question);
+	      current_question+=1;
+	      answer_user=-1;
 	    }
+	    else{
+	      printf("YOU WRONGO BRO");
+	    }
+	    strcpy(buffer, questions[current_question]);
 	    broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer));
-	    current_question+=1;
+
+	    strcpy(buffer, answers[current_question]);
+	    broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer));
+
+	   
+        
+	    
 	  }
         }
       }
     }
-
 
   }
 }

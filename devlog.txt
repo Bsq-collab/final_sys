@@ -110,3 +110,6 @@ players can now answer questions
 bayanBbrianL -- 2018-01-25 15:53:48
 answer checking finally works. added an if statement. 
 
+bayanBbrianL -- 2018-01-25 16:25:49
+FINALLY CORRECT ANSWER PRINTS CORRECT AND MOVES ON TO NEXT Q. INCORRECT ANSWER REPEATS THAT QUESTION
+
