@@ -17,6 +17,8 @@
 #include <ctype.h>
 
 #define PORT_NUM "6743"
+#define READ 0
+#define WRITE 0
 
 //Start_screen fxn names:
 int get_num_players();
@@ -27,7 +29,11 @@ void print_lines(int client_socket, char** lines, int number_of_lines, int line_
 int get_line(int client_socket, char** lines,int number_of_lines, int line_num);
 int get_user_num(int client_socket);
 void process(int client_socket, char * buffer, size_t buffersize);
+void broadcast(int * client_socket, int num_of_players, char * buffer, size_t buffersize);
 
 //Lim_Player fxn names:
 void slow_print(char * str);
 char ask(char * q_and_a);
+
+//select_server fxn names:
+void get_q_and_a(char ** questions, char ** answers, char ** parsed_key);

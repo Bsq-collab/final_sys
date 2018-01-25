@@ -89,7 +89,13 @@ int get_user_num(int client_socket){
 
 void process(int client_socket, char * buffer, size_t buffersize) {
   read(client_socket, buffer, buffersize);
-  printf("[subserver %d] received: [%s]\n", getpid(), buffer);
+  printf("[socket %d] received: [%s]\n", client_socket, buffer);
+}
+void broadcast(int * client_socket, int num_of_players, char * buffer, size_t buffersize) {
+  int i;
+  for ( i=0 ; i<num_of_players ; i++ ) {
+    write(client_socket[i], buffer, buffersize);
+  }
 }
 
 //
