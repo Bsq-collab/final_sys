@@ -94,12 +94,14 @@ int main() {
               if ( !strcmp(names[i],"") ) ready = 0;
             }
           }
-          if (ready && current_question < 4)  {
+          if (ready && current_question < 10)  {
             printf("@@@@@@@@@\n");
             sprint_lines(buffer,(char **)questions,1,current_question);
             broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer));
             // sprint_lines(buffer,(char **)answers,4,current_answer);
             // broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer));
+           current_question+=1;
+            // current_answer+=4;
 
           }
         }
@@ -108,4 +110,22 @@ int main() {
 
 
   }
+}
+void get_q_and_a(char ** questions, char ** answers, char ** parsed_key) {
+  //for the questions
+  char contents[1000];
+  //for the answers
+  char choices[1000];
+  //for the key
+  char key[1000];
+
+  //reading:
+  readfile("../question.txt",contents,1000);
+  readfile("../A.txt",choices,1000);
+  readfile("../correct.txt",key,1000);
+  //parsing:
+  parse_new_line(questions,contents,"\n");
+  parse_new_line(answers,choices,"\n");
+  parse_new_line(parsed_key,key,"\n");
+
 }

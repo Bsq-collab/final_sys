@@ -89,3 +89,6 @@ fixed answering system
 limB -- 2018-01-25 08:32:03
 game starts when all players give names
 
+bayanB brianL -- 2018-01-25 09:31:24
+Fixed the null questions printing. it now prints the questions and takes user input. havent checked the answer choices. only prints up to question 8 though.
+
