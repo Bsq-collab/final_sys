@@ -24,11 +24,11 @@ int get_int(int client_socket){
 }
 
 /*int main(){
-  int n;
-  n = get_num_players();
-  printf("%d\n", n);
-  return 0;
-  }*/
+int n;
+n = get_num_players();
+printf("%d\n", n);
+return 0;
+}*/
 void readfile(char* fileName, char* contents,int size ){
 
   int fd =open(fileName, O_RDONLY);
@@ -37,33 +37,29 @@ void readfile(char* fileName, char* contents,int size ){
 
 void parse_new_line(char ** buffer, char* line, char * parse_on){
   int i=0;
-  while(i<10){
-    char *f = strsep(&line,parse_on);
-    // sscanf(strsep(&line,parse_on),"%s",buffer[i]);
-    buffer[i] = f;
-    // printf("%s\n", line);
+  char * temp;
+  while(temp = strsep(&line,parse_on)){
+    // sscanf(temp,"%s",buffer[i]);
+    // sprintf(buffer[i], "%s", temp);
+    // buffer[i] = strdup(temp);
+    strcpy(buffer[i], temp);
+    printf("######%s\n", buffer[i]);
+    // strncpy(buffer[i], strsep(&line,parse_on), 256);
     i+=1;
   }
+  printf("&&&&&%s\n", temp);
+
 }
 
-void sprint_lines(char * buffer, char** lines, int number_of_lines, int line_num){
+void sprint_lines(char * buffer, char** lines, int line_num){
   // int i;
   // for (i=0 ; i<20 ; i++){
   //   printf("&&&\n");
   //   printf("[%d] %s\n", i, lines[i]);
   // }
-  int i=line_num;
-  char line[256];
-  *buffer = 0;
-  printf("@%s\n",buffer);
-  while(i<number_of_lines+line_num){
-    sprintf(line,"%s\n",lines[i]);
-    printf("@@%s\n",line);
-    strcat(buffer,line);
-    i+=1;
-  }
-  strcat(buffer,"\n");
-  printf("@@@%s\n",buffer);
+  printf("@@%s\n",lines[line_num]);
+  strcpy(buffer,lines[line_num]);
+  // printf("BBBBUUFFFEERRRRR@@@%s\n",buffer);
 }
 int get_line(int client_socket, char** lines,int number_of_lines, int line_num){
   char output[256];

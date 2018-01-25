@@ -29,15 +29,37 @@ int main() {
   FD_ZERO(&read_fds);
   FD_ZERO(&master);
 
-  char questions[BUFFER_SIZE][BUFFER_SIZE];
-  char answers[BUFFER_SIZE][BUFFER_SIZE];
-  char parsed_key[BUFFER_SIZE][BUFFER_SIZE];
+  // char questions[BUFFER_SIZE][BUFFER_SIZE];
+  // char answers[BUFFER_SIZE][BUFFER_SIZE];
+  // char parsed_key[BUFFER_SIZE][BUFFER_SIZE];
+  // for ( i=0 ; i<BUFFER_SIZE ; i++ ) {
+  //   memset(questions[i], 0, BUFFER_SIZE);
+  //   memset(answers[i], 0, BUFFER_SIZE);
+  //   memset(parsed_key[i], 0, BUFFER_SIZE);
+  // }
+  // get_q_and_a((char **)questions, (char **)answers, (char **)parsed_key);
+  char *questions[BUFFER_SIZE];
+  char *answers[BUFFER_SIZE];
+  char *parsed_key[BUFFER_SIZE];
   for ( i=0 ; i<BUFFER_SIZE ; i++ ) {
-    memset(questions[i], 0, BUFFER_SIZE);
-    memset(answers[i], 0, BUFFER_SIZE);
-    memset(parsed_key[i], 0, BUFFER_SIZE);
+    // char tempq[BUFFER_SIZE];
+    // memset(tempq, 0, BUFFER_SIZE);
+    // questions[i] = tempq;
+    // char tempa[BUFFER_SIZE];
+    // memset(tempa, 0, BUFFER_SIZE);
+    // answers[i] = tempa;
+    // char tempk[BUFFER_SIZE];
+    // memset(tempk, 0, BUFFER_SIZE);
+    // parsed_key[i] = tempk;
+    questions[i] = (char *)calloc(BUFFER_SIZE, sizeof(char));
+    answers[i] = (char *)calloc(BUFFER_SIZE, sizeof(char));
+    parsed_key[i] = (char *)calloc(BUFFER_SIZE, sizeof(char));
   }
-  get_q_and_a((char **)questions, (char **)answers, (char **)parsed_key);
+  // char ** questions = (char **)calloc(BUFFER_SIZE, sizeof(char *));
+  // char ** answers = (char **)calloc(BUFFER_SIZE, sizeof(char *));
+  // char ** parsed_key = (char **)calloc(BUFFER_SIZE, sizeof(char *));
+  get_q_and_a(questions, answers, parsed_key);
+  printf("*********%s\n",answers[5]);
 
   int current_question=0;
   int current_answer=0;
@@ -96,13 +118,15 @@ int main() {
           }
           if (ready && current_question < 10)  {
             printf("@@@@@@@@@\n");
-            sprint_lines(buffer,(char **)questions,1,current_question);
+            memset(buffer, 0, BUFFER_SIZE);
+            strcpy(buffer, questions[current_question]);
+            // sprint_lines(buffer,(char **)questions,current_question);
             broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer));
-            // sprint_lines(buffer,(char **)answers,4,current_answer);
-            // broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer));
-           current_question+=1;
-            // current_answer+=4;
-
+            strcpy(buffer, answers[current_question]);
+            // sprint_lines(buffer,(char **)answers, current_question);
+            broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer));
+            current_question+=1;
+            //current_answer+=4;
           }
         }
       }

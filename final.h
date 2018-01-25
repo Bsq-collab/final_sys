@@ -26,6 +26,7 @@ int get_num_players();
 int get_int(int client_socket);
 void readfile(char* fileName, char* contents,int size );
 void parse_new_line(char ** buffer, char* line, char * parse_on);
+void sprint_lines(char * buffer, char** lines, int line_num);
 void print_lines(int client_socket, char** lines, int number_of_lines, int line_num);
 int get_line(int client_socket, char** lines,int number_of_lines, int line_num);
 int get_user_num(int client_socket);
