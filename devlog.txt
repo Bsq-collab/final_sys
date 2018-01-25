@@ -95,3 +95,6 @@ Fixed the null questions printing. it now prints the questions and takes user in
 gabiN -- 2018-01-25 10:47:21
 write function hheaders and descriptions for all functions in start_screen.c
 
+gabiN -- 2018-01-25 11:42:20
+finish writing h headers for networking functions
+

@@ -1,3 +1,5 @@
+
+        ===================== start_screen.c ========================
 /**
  @Function: get_int
  @Params: int client_socket
@@ -54,5 +56,21 @@
  @Explanation: iteratively writes buffersize bytes from buffer to all client sockets
 */
 
+
+        ===================== select_server.c ========================
+
+/**
+ @Function: die
+ @Params: int * client_socket
+ @Returns: void
+ @Explanation: closes all client sockets, then exits
+*/
+
+/**
+ @Function: get_q_and_a
+ @Params: char ** questions, char ** answers, char ** parsed_key
+ @Returns: void
+ @Explanation: reads and stores the contents of file containing questions, file containing answer choices, and a file containing the correct answers to questions
+*/
 
 
