@@ -86,3 +86,6 @@ fixed the trash memory problem (the files were in the above directory not networ
 limB -- 2018-01-24 18:27:01
 fixed answering system
 
+limB -- 2018-01-25 08:32:03
+game starts when all players give names
+
