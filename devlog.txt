@@ -101,3 +101,6 @@ write function hheaders and descriptions for all functions in start_screen.c
 gabiN -- 2018-01-25 11:42:20
 finish writing h headers for networking functions
 
+gabiN -- 2018-01-25 13:48:15
+reformat text file with answer choices!
+
