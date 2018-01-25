@@ -33,6 +33,7 @@ void readfile(char* fileName, char* contents,int size ){
 
   int fd =open(fileName, O_RDONLY);
   read(fd, contents, size);
+  close(fd);
 }
 
 void parse_new_line(char ** buffer, char* line, char * parse_on){

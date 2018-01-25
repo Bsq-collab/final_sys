@@ -1,0 +1,58 @@
+/**
+ @Function: get_int
+ @Params: int client_socket
+ @Returns: int
+ @Explanation: uses process() to read a buffer from client_socket, and sscanf to interpret the buffer as an int
+*/
+
+/**
+ @Function: readfile
+ @Params: char * fileName, char * contents, int size
+ @Returns: void
+ @Explanation: opens the given file, and then reads size bytes to contents
+*/
+
+/**
+ @Function: parse_new_line
+ @Params: char ** buffer, char * line, char * parse_on
+ @Returns: void
+ @Explanation: reads ten lines of code from line, storing a pointer to each line in a subsequent index of buffer
+*/
+
+/**
+ @Function: sprint_lines
+ @Params: char * buffer, char ** lines, int number_of_lines, int line_num
+ @Returns: void
+ @Explanation: #INSERTEXPLANATION
+*/
+
+/**
+ @Function: get_line
+ @Params: int client_socket, char ** lines, int number_of_lines, int line_num
+ @Returns: int
+ @Explanation: returns the correct answer choice of the current question, and writes it to client_socket 
+*/
+
+/**
+ @Function: get_user_num
+ @Params: int client_socket
+ @Returns: int
+ @Explanation: asks client_socket for their answer to the current question [1,4], then returns this value
+*/
+
+/**
+ @Function: process
+ @Params: int client_socket, char * buffer, size_t buffersize
+ @Returns: int
+ @Explanation: reads buffersize bytes from client_socket into buffer, then prints the received data; returns number of bytes read
+*/
+
+/**
+ @Function: broadcast
+ @Params: int * client_socket, int num_of_players, char * buffer, size_t buffersize 
+ @Returns: void
+ @Explanation: iteratively writes buffersize bytes from buffer to all client sockets
+*/
+
+
+
