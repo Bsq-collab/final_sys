@@ -19,6 +19,7 @@
 #define PORT_NUM "6743"
 #define READ 0
 #define WRITE 0
+#define NUM_PLAYERS 2
 
 //Start_screen fxn names:
 int get_num_players();
@@ -28,7 +29,7 @@ char ** parse_new_line(char* line,char * parse_on);
 void print_lines(int client_socket, char** lines, int number_of_lines, int line_num);
 int get_line(int client_socket, char** lines,int number_of_lines, int line_num);
 int get_user_num(int client_socket);
-void process(int client_socket, char * buffer, size_t buffersize);
+int process(int client_socket, char * buffer, size_t buffersize);
 void broadcast(int * client_socket, int num_of_players, char * buffer, size_t buffersize);
 
 //Lim_Player fxn names:

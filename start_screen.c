@@ -45,17 +45,13 @@ char ** parse_new_line(char* line,char * parse_on){
   return retans;
 }
 
-void print_lines(int client_socket, char** lines, int number_of_lines, int line_num){
-  char output[256];
-  memset(output, 0, 256);
+void sprint_lines(char * buffer, char** lines, int number_of_lines, int line_num){
   int i=line_num;
   while(i<number_of_lines+line_num){
-    sprintf(output,"%s\n",lines[i]);
-    write(client_socket, output, sizeof(output));
+    sprintf(buffer,"%s\n",lines[i]);
     i+=1;
   }
-  sprintf(output,"\n");
-  write(client_socket, output, sizeof(output));
+  sprintf(buffer,"\n");
 }
 int get_line(int client_socket, char** lines,int number_of_lines, int line_num){
   char output[256];
@@ -87,9 +83,10 @@ int get_user_num(int client_socket){
   return n;
 }
 
-void process(int client_socket, char * buffer, size_t buffersize) {
-  read(client_socket, buffer, buffersize);
+int process(int client_socket, char * buffer, size_t buffersize) {
+  int r = read(client_socket, buffer, buffersize);
   printf("[socket %d] received: [%s]\n", client_socket, buffer);
+  return r;
 }
 void broadcast(int * client_socket, int num_of_players, char * buffer, size_t buffersize) {
   int i;
