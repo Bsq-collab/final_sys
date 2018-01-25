@@ -35,23 +35,33 @@ void readfile(char* fileName, char* contents,int size ){
   read(fd, contents, size);
 }
 
-char ** parse_new_line(char* line,char * parse_on){
-  char ** retans = malloc(256* sizeof(char*));
+void parse_new_line(char ** buffer, char* line, char * parse_on){
   int i=0;
   while(line){
-    retans[i]=strsep(&line,parse_on);
+    sscanf(strsep(&line,parse_on),"%s",buffer[i]);
+    // buffer[i] = strsep(&line,parse_on);
     i+=1;
   }
-  return retans;
 }
 
 void sprint_lines(char * buffer, char** lines, int number_of_lines, int line_num){
-  int i=line_num;
-  while(i<number_of_lines+line_num){
-    sprintf(buffer,"%s\n",lines[i]);
-    i+=1;
+  int i;
+  for (i=0 ; i<20 ; i++){
+    printf("&&&\n");
+    printf("[%d] %s\n", i, lines[i]);
   }
-  sprintf(buffer,"\n");
+  // int i=line_num;
+  // char line[256];
+  // *buffer = 0;
+  // printf("@%s\n",buffer);
+  // while(i<number_of_lines+line_num){
+  //   sprintf(line,"%s\n",lines[i]);
+  //   printf("@@%s\n",line);
+  //   strcat(buffer,line);
+  //   i+=1;
+  // }
+  // strcat(buffer,"\n");
+  // printf("@@@%s\n",buffer);
 }
 int get_line(int client_socket, char** lines,int number_of_lines, int line_num){
   char output[256];
@@ -93,6 +103,25 @@ void broadcast(int * client_socket, int num_of_players, char * buffer, size_t bu
   for ( i=0 ; i<num_of_players ; i++ ) {
     write(client_socket[i], buffer, buffersize);
   }
+}
+
+void get_q_and_a(char ** questions, char ** answers, char ** parsed_key) {
+  //for the questions
+  char contents[1000];
+  //for the answers
+  char choices[1000];
+  //for the key
+  char key[1000];
+
+  //reading:
+  readfile("question.txt",contents,1000);
+  readfile("A.txt",choices,1000);
+  readfile("correct.txt",key,1000);
+  //parsing:
+  parse_new_line(questions,contents,"\n");
+  parse_new_line(answers,choices,"\n");
+  parse_new_line(parsed_key,key,"\n");
+
 }
 
 //

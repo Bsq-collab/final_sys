@@ -25,16 +25,14 @@
 int get_num_players();
 int get_int(int client_socket);
 void readfile(char* fileName, char* contents,int size );
-char ** parse_new_line(char* line,char * parse_on);
+void parse_new_line(char ** buffer, char* line, char * parse_on);
 void print_lines(int client_socket, char** lines, int number_of_lines, int line_num);
 int get_line(int client_socket, char** lines,int number_of_lines, int line_num);
 int get_user_num(int client_socket);
 int process(int client_socket, char * buffer, size_t buffersize);
 void broadcast(int * client_socket, int num_of_players, char * buffer, size_t buffersize);
+void get_q_and_a(char ** questions, char ** answers, char ** parsed_key);
 
 //Lim_Player fxn names:
 void slow_print(char * str);
 char ask(char * q_and_a);
-
-//select_server fxn names:
-void get_q_and_a(char ** questions, char ** answers, char ** parsed_key);

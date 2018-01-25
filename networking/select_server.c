@@ -29,9 +29,15 @@ int main() {
   FD_ZERO(&read_fds);
   FD_ZERO(&master);
 
-  char ** questions;
-  char ** answers;
-  char ** parsed_key;
+  char questions[BUFFER_SIZE][BUFFER_SIZE];
+  char answers[BUFFER_SIZE][BUFFER_SIZE];
+  char parsed_key[BUFFER_SIZE][BUFFER_SIZE];
+  for ( i=0 ; i<BUFFER_SIZE ; i++ ) {
+    memset(questions[i], 0, BUFFER_SIZE);
+    memset(answers[i], 0, BUFFER_SIZE);
+    memset(parsed_key[i], 0, BUFFER_SIZE);
+  }
+  get_q_and_a((char **)questions, (char **)answers, (char **)parsed_key);
 
   int current_question=0;
   int current_answer=0;
@@ -90,10 +96,10 @@ int main() {
           }
           if (ready && current_question < 4)  {
             printf("@@@@@@@@@\n");
-            sprint_lines(buffer,questions,1,current_question);
+            sprint_lines(buffer,(char **)questions,1,current_question);
             broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer));
-            sprint_lines(buffer,answers,4,current_answer);
-            broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer));
+            // sprint_lines(buffer,(char **)answers,4,current_answer);
+            // broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer));
 
           }
         }
@@ -102,25 +108,4 @@ int main() {
 
 
   }
-}
-
-
-
-void get_q_and_a(char ** questions, char ** answers, char ** parsed_key) {
-  //for the questions
-  char contents[1000];
-  //for the answers
-  char choices[1000];
-  //for the key
-  char key[1000];
-
-  //reading:
-  readfile("../question.txt",contents,1000);
-  readfile("../A.txt",choices,1000);
-  readfile("../correct.txt",key,1000);
-  //parsing:
-  questions = parse_new_line(contents,"\n");
-  answers = parse_new_line(choices,"\n");
-  parsed_key = parse_new_line(key,"\n");
-
 }
