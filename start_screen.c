@@ -92,11 +92,21 @@ int process(int client_socket, char * buffer, size_t buffersize) {
   printf("[socket %d] received: [%s]\n", client_socket, buffer);
   return r;
 }
-void broadcast(int * client_socket, int num_of_players, char * buffer, size_t buffersize) {
+void broadcast(int * client_socket, int num_of_players, char * buffer, size_t buffersize,int*points, char ** names) {
   int i;
+  char s[256];
+  char temp[256];
+  *s = 0;
+  for ( i=0 ; i<num_of_players ; i++ ) {
+    sprintf(temp,"Player %s has %d points", names[i], points[i]);
+    strcat(s,temp);
+  }
   for ( i=0 ; i<num_of_players ; i++ ) {
     write(client_socket[i], buffer, buffersize);
+    
+    write(client_socket[i],s,sizeof(s));
   }
+      
 }
 
 

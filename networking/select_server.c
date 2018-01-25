@@ -45,7 +45,9 @@ get_q_and_a(questions, answers, parsed_key);
   int current_answer=0;
 
   int client_socket[NUM_PLAYERS];
+  int points[NUM_PLAYERS];
   memset(client_socket, 0, NUM_PLAYERS);
+  memset(points, 0, NUM_PLAYERS);
 
   listen_socket = server_setup();
   int fdmax = listen_socket;
@@ -97,10 +99,10 @@ get_q_and_a(questions, answers, parsed_key);
 	    if(ready){
 	      strcpy(buffer, questions[current_question]);
 	      
-	      broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer));
+	      broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer),points, names);
 	      strcpy(buffer, answers[current_question]);
 	      
-	      broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer));
+	      broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer),points,names);
 	      strcpy(ans_buf, parsed_key[current_question]);
 	    }
 	  }
@@ -113,8 +115,9 @@ get_q_and_a(questions, answers, parsed_key);
 	    if(answer_user==atoi(parsed_key[current_question])){
 	      strcpy(buffer, "GOOD WOORK\n");
 	      printf("buffer=====:%s\n",buffer);
-	      broadcast(client_socket,NUM_PLAYERS, buffer,sizeof(buffer));
+	      broadcast(client_socket,NUM_PLAYERS, buffer,sizeof(buffer),points,names);
 	      printf("CURRENT QUESTION: %d",current_question);
+	      points[i]+=109;
 	      current_question+=1;
 	      answer_user=-1;
 	    }
@@ -122,14 +125,10 @@ get_q_and_a(questions, answers, parsed_key);
 	      printf("YOU WRONGO BRO");
 	    }
 	    strcpy(buffer, questions[current_question]);
-	    broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer));
+	    broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer),points,names);
 
 	    strcpy(buffer, answers[current_question]);
-	    broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer));
-
-	   
-        
-	    
+	    broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer),points,names);
 	  }
         }
       }
