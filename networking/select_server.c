@@ -30,36 +30,15 @@ int main() {
   FD_ZERO(&read_fds);
   FD_ZERO(&master);
 
-  // char questions[BUFFER_SIZE][BUFFER_SIZE];
-  // char answers[BUFFER_SIZE][BUFFER_SIZE];
-  // char parsed_key[BUFFER_SIZE][BUFFER_SIZE];
-  // for ( i=0 ; i<BUFFER_SIZE ; i++ ) {
-  //   memset(questions[i], 0, BUFFER_SIZE);
-  //   memset(answers[i], 0, BUFFER_SIZE);
-  //   memset(parsed_key[i], 0, BUFFER_SIZE);
-  // }
-  // get_q_and_a((char **)questions, (char **)answers, (char **)parsed_key);
   char *questions[BUFFER_SIZE];
   char *answers[BUFFER_SIZE];
   char *parsed_key[BUFFER_SIZE];
   for ( i=0 ; i<BUFFER_SIZE ; i++ ) {
-    // char tempq[BUFFER_SIZE];
-    // memset(tempq, 0, BUFFER_SIZE);
-    // questions[i] = tempq;
-    // char tempa[BUFFER_SIZE];
-    // memset(tempa, 0, BUFFER_SIZE);
-    // answers[i] = tempa;
-    // char tempk[BUFFER_SIZE];
-    // memset(tempk, 0, BUFFER_SIZE);
-    // parsed_key[i] = tempk;
-    questions[i] = (char *)calloc(BUFFER_SIZE, sizeof(char));
+  questions[i] = (char *)calloc(BUFFER_SIZE, sizeof(char));
     answers[i] = (char *)calloc(BUFFER_SIZE, sizeof(char));
     parsed_key[i] = (char *)calloc(BUFFER_SIZE, sizeof(char));
   }
-  // char ** questions = (char **)calloc(BUFFER_SIZE, sizeof(char *));
-  // char ** answers = (char **)calloc(BUFFER_SIZE, sizeof(char *));
-  // char ** parsed_key = (char **)calloc(BUFFER_SIZE, sizeof(char *));
-  get_q_and_a(questions, answers, parsed_key);
+get_q_and_a(questions, answers, parsed_key);
   printf("*********%s\n",answers[5]);
 
   int current_question=0;
@@ -98,7 +77,6 @@ int main() {
       //if you don't read from stdin, it will continue to trigger select()
       fgets(buffer, BUFFER_SIZE, stdin);
       die(client_socket);
-      // printf("[server] client count: %d\n", client_count);
     }//end stdin select
 
     //if a client triggered select
@@ -116,25 +94,34 @@ int main() {
             for ( i=0 ; i<NUM_PLAYERS ; i++ ) {
               if ( !strcmp(names[i],"") ) ready = 0;
             }
-          }
-          if (ready && current_question < 10)  {
+	    if(ready){
+	      strcpy(buffer, questions[current_question]);
+	      
+	      broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer));
+	      strcpy(buffer, answers[current_question]);
+	      
+	      broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer));
+	      strcpy(ans_buf, parsed_key[current_question]);
+	    }
+	  }
+          else if (ready && current_question < 10)  {
 	    int answer_user=0;
 	    sscanf(ans_buf,"%d\n",&answer_user);
-            printf("@@@@@@@@@\n");
+	    printf("@@@@@@@@@\n");
             strcpy(buffer, questions[current_question]);
             
             broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer));
             strcpy(buffer, answers[current_question]);
             
             broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer));
-	    strcpy(buffer, parsed_key[current_question]);
+	    strcpy(ans_buf, parsed_key[current_question]);
+           
 	    if(answer_user==atoi(parsed_key[current_question])){
-	      strcpy(buffer, "good work\n");
+	      strcpy(buffer, "GOOD WOORK\n");
 	      printf("buffer=====:%s\n",buffer);
 	      broadcast(client_socket,NUM_PLAYERS, buffer,sizeof(buffer));
 	    }
 	    broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer));
-            
 	    current_question+=1;
 	  }
         }
