@@ -3,18 +3,6 @@
 
 int get_int(int client_socket);
 
-// int get_num_players(){
-//   int n;
-//   printf("Hello! Welcome to our beautiful final project\n");
-//   printf("How many players? (2 to 4 players)\n");
-//   n = get_int();
-//   while(n > 4 || n < 2){
-//     printf("Invalid input. Please try again.\n");
-//     n = get_int();
-//   }
-//   return n;
-// }
-
 int get_int(int client_socket){
   char buffer[256];
   int n;
@@ -23,12 +11,6 @@ int get_int(int client_socket){
   return n;
 }
 
-/*int main(){
-int n;
-n = get_num_players();
-printf("%d\n", n);
-return 0;
-}*/
 void readfile(char* fileName, char* contents,int size ){
 
   int fd =open(fileName, O_RDONLY);
@@ -43,19 +25,10 @@ void parse_new_line(char ** buffer, char* line, char * parse_on){
     strcpy(buffer[i], temp);
     i+=1;
   }
-  printf("&&&&&%s\n", temp);
-
 }
 
 void sprint_lines(char * buffer, char** lines, int line_num){
-  // int i;
-  // for (i=0 ; i<20 ; i++){
-  //   printf("&&&\n");
-  //   printf("[%d] %s\n", i, lines[i]);
-  // }
-  printf("@@%s\n",lines[line_num]);
   strcpy(buffer,lines[line_num]);
-  // printf("BBBBUUFFFEERRRRR@@@%s\n",buffer);
 }
 int get_line(int client_socket, char** lines,int number_of_lines, int line_num){
   char output[256];
@@ -96,110 +69,17 @@ void broadcast(int * client_socket, int num_of_players, char * buffer, size_t bu
   int i;
   char s[256];
   char temp[256];
-  *s = 0;
+  memset(s, 0, 256);
+  memset(temp, 0, 256);
+  strcat(s, "\n");
   for ( i=0 ; i<num_of_players ; i++ ) {
-    sprintf(temp,"Player %s has %d points", names[i], points[i]);
+    sprintf(temp,"Player %s has %d points\n", names[i], points[i]);
     strcat(s,temp);
   }
   for ( i=0 ; i<num_of_players ; i++ ) {
     write(client_socket[i], buffer, buffersize);
-    
+
     write(client_socket[i],s,sizeof(s));
   }
-      
+
 }
-
-
-//
-// int old_main(){
-//   //gets number of players
-//   int num_players=0;
-//   num_players=get_num_players();
-//   while(num_players<2 ||  num_players>4){
-//     printf("How many players?(2-4)\n");
-//     scanf("%d",&num_players);
-//     printf("number of players: %d\n",num_players);
-//   }
-//   int points[num_players];
-//   memset(points,0,num_players);
-//   int clearer=0;
-//   while(clearer<4){
-//     points[clearer]=0;
-//     clearer+=1;
-//   }
-//   printf("points 0: %d\t 1: %d\t 2: %d\t\n",points[0],points[1],points[2]);
-//   //asks for player names
-//   //int i=1;
-//   //char s[256][256];
-//   //gets players names
-//   /* while (i<=num_players){
-//     printf("\n\n what's player %d's name? \n",i);
-//     scanf("%s",s[i-1]);
-//     printf("player %d: %s\n",i, s[i-1]);
-//     i++;
-//   }
-//
-//   //add a directions section if time. so that this is useful...
-//   char start[256];
-//   memset(start,0,256);
-//
-//   while(strcmp(start,"start")){
-//     printf("type start to start:\n");
-//     scanf("%s",start);
-//   }*/
-//   //for while loop
-//   int current_question=0;
-//   int current_answer=0;
-//   //for the questions
-//   char contents[1000];
-//   char ** questions;
-//   //for the answers
-//   char choices[1000];
-//   char ** answers;
-//   //for the key
-//   char key[1000];
-//   char ** parsed_key;
-//
-//   //reading:
-//   readfile("question.txt",contents,1000);
-//   readfile("A.txt",choices,1000);
-//   readfile("correct.txt",key,1000);
-//   //parsing:
-//   questions = parse_new_line(contents,"\n");
-//   answers = parse_new_line(choices,"\n");
-//   parsed_key = parse_new_line(key,"\n");
-//
-//   while(current_question<10){
-//
-//     print_lines(questions,1,current_question);
-//     print_lines(answers,4,current_answer);
-//
-//     int LINE;
-//     LINE = get_line(parsed_key,1,current_question);
-//     // printf("\n\n\n\nLINE:_%d_\n\n",LINE);
-//
-//     int user_input = 0;
-//     user_input = get_user_num();
-//     printf("YOU PUT THIS AS YOUR ANSWER>: %d\n", user_input);
-//     printf("user_input:_%d_\n\n",user_input);
-//
-//     if(user_input==LINE){
-//       printf("\n\n\nCORRECT!!!!!!!!!!!!!!!!!!!!!!\n\n\n\n");
-//       points[0]+=100;
-//       clearer=0;
-//       while(clearer<num_players){
-//         printf("player %d: %d\t", clearer+1, points[clearer]);
-//         clearer+=1;
-//       }
-//       printf("\n");
-//     }
-//     else{
-//       printf("\n\nINCORRECT\n\n The correct answer is: %d\n\n",LINE);
-//     }
-//
-//     current_question++;
-//     current_answer+=4;
-//
-//   }
-//
-//}

@@ -1,7 +1,14 @@
 #include "networking.h"
 #include "../final.h"
 
+static void sighandler(int signo){
+  if (signo == SIGPIPE){
+    exit(0);
+  }
+}
+
 int main(int argc, char **argv) {
+  signal(SIGPIPE, sighandler);
 
   int server_socket;
   char buffer[BUFFER_SIZE];
@@ -9,9 +16,9 @@ int main(int argc, char **argv) {
   fd_set read_fds;
 
   if (argc == 2)
-    server_socket = client_setup( argv[1]);
+  server_socket = client_setup( argv[1]);
   else
-    server_socket = client_setup( TEST_IP );
+  server_socket = client_setup( TEST_IP );
 
   while (1) {
 
@@ -27,7 +34,11 @@ int main(int argc, char **argv) {
     FD_SET(server_socket, &read_fds); //add socket to fd set
 
     //select will block until either fd is ready
-    select(server_socket + 1, &read_fds, NULL, NULL, NULL);
+    // select(server_socket + 1, &read_fds, NULL, NULL, NULL);
+    if (select(server_socket+1, &read_fds, NULL, NULL, NULL) == -1) {
+      perror("select");
+      exit(1);
+    }
 
     if (FD_ISSET(STDIN_FILENO, &read_fds)) {
       fgets(buffer, sizeof(buffer), stdin);
