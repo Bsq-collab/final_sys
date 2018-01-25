@@ -15,6 +15,7 @@ int main() {
   int i;
   int client_count = 0;
   char buffer[BUFFER_SIZE];
+  char ans_buf[BUFFER_SIZE];
 
   char names[NUM_PLAYERS][BUFFER_SIZE];
   for ( i=0 ; i<NUM_PLAYERS ; i++ ) {
@@ -103,9 +104,9 @@ int main() {
     //if a client triggered select
     for ( i=0 ; i<client_count ; i++ ) {
       if (FD_ISSET(client_socket[i], &read_fds)) {
-        if ( process(client_socket[i], buffer, sizeof(buffer)) ) {
+        if ( process(client_socket[i], ans_buf, sizeof(ans_buf)) ) {
           if (!ready) {
-            sscanf(buffer, "%s\n", names[i]);
+            sscanf(ans_buf, "%s\n", names[i]);
             sprintf(buffer, "hello %s\n", names[i]);
             write(client_socket[i], buffer, sizeof(buffer));
             sprintf(buffer, "game will start when all players join\n");
@@ -117,17 +118,25 @@ int main() {
             }
           }
           if (ready && current_question < 10)  {
+	    int answer_user=0;
+	    sscanf(ans_buf,"%d\n",&answer_user);
             printf("@@@@@@@@@\n");
-            memset(buffer, 0, BUFFER_SIZE);
             strcpy(buffer, questions[current_question]);
-            // sprint_lines(buffer,(char **)questions,current_question);
+            
             broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer));
             strcpy(buffer, answers[current_question]);
-            // sprint_lines(buffer,(char **)answers, current_question);
+            
             broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer));
-            current_question+=1;
-            //current_answer+=4;
-          }
+	    strcpy(buffer, parsed_key[current_question]);
+	    if(answer_user==atoi(parsed_key[current_question])){
+	      strcpy(buffer, "good work\n");
+	      printf("buffer=====:%s\n",buffer);
+	      broadcast(client_socket,NUM_PLAYERS, buffer,sizeof(buffer));
+	    }
+	    broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer));
+            
+	    current_question+=1;
+	  }
         }
       }
     }
