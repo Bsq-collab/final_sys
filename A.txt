@@ -4,7 +4,7 @@
 1 epithelial    2 connective    3 nervous    4 muscle
 1 constant acceleration    2 constant speed    3 constant velocity    4 zero acceleration
 1 slate    2 marble    3 basalt    4 sandstone
-1 calcite has a hardness of 3 on most of its surfaces but a hardness of 4 along the crystal face perpendicular to its long axis    2 the Moh’s scale measures the absolute hardness of minerals    3 a mineral’s chemical composition largely determines its crystal shape and cleavage pattern    4 a mineral’s color is the same as its streak
+1 calcite has a hardness of 3 on most of its surfaces but a hardness of 4 along the crystal face perpendicular to its long axis    2 the Moh’s scale measures the absolute hardness of minerals    3 a mineral’s chemical composition largely determines itscrystal shape and cleavage pattern    4 a mineral’s color is the same as its streak
 1 outside    2 stone    3 side    4 surface
 1 cobalt    2 nickel    3 iron    4 titanium
 1 its magnetic properties    2 how much volume it has    3 the amount of matter it contains    4 its location

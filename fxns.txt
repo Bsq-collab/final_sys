@@ -23,9 +23,9 @@
 
 /**
  @Function: sprint_lines
- @Params: char * buffer, char ** lines, int number_of_lines, int line_num
+ @Params: sprint_lines(char * buffer, char** lines, int line_num)
  @Returns: void
- @Explanation: #INSERTEXPLANATION
+ @Explanation: copies lines[line_num] to the buffer, used after parsing. 
 */
 
 /**

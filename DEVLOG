@@ -9,24 +9,34 @@ Gabi Newman
 OBSTACLES OVERCOME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 wow we so BOSS bc...
+We figured out networking which was quite complicated.
+We spent 6 hours on a bug and squashed it :D :D :D
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-blah blah pesky bug...
-maybe some of these will move into the Obs.Ovrcm section...
-
+After closing the server and trying to run it a few seconds later sometimes we get this error:
+      [server] socket created
+      [server bind] error 98: Address already in use
+after waiting about a minute we can run the server again. Patience seems to be the only solution to this problem. 
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-wow! oo!...
+We mastered valgrind and gdb after having to debug for about 20 hours!!
+Learned about networking and sockets through practice!
+
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Didn't incorporate shuffle because it doesn't add much to the project
+The game ends after 10 questions.
+we didn't have a file called a.txt b.txt c.txt d.txt.
+   instead we had a file called question.txt and A.txt and correct.txt (the question, choices, correct answer choice)
+
 
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-tales of wisdom gained...
-
+We should make sure we know what we're getting into before deciding on a project.
+Networking was quite hard to get a handle on.  
 
 ||||||||||||||||||||||||||||||||||||||||||
 
@@ -107,16 +117,16 @@ reformat text file with answer choices!
 limB -- 2018-01-25 14:56:56
 players can now answer questions
 
-bayanBbrianL -- 2018-01-25 15:53:48
-answer checking finally works. added an if statement. 
+bayanB brianL -- 2018-01-25 15:53:48
+answer checking finally works. added an if statement to count for the error we encountered in which it only prints good work some of the time still a little buggy. 
 
-bayanBbrianL -- 2018-01-25 16:25:49
+bayanB brianL -- 2018-01-25 16:25:49
 FINALLY CORRECT ANSWER PRINTS CORRECT AND MOVES ON TO NEXT Q. INCORRECT ANSWER REPEATS THAT QUESTION
 
-brianLbayanB -- 2018-01-25 18:43:08
+brianL bayanB -- 2018-01-25 18:43:08
 started to incorporate the points system to match with the player's names. After many segfaults we figured out how to broadcast the points on each question. after a player gets a questoin right it moves on to the next question. if they get it wrong it reprints that question. after 10 questions the user with most points is declared the winner. only thing that doesnt work is closing the clients.
 
-brianLbayanB -- 2018-01-25 19:01:24
+brianL bayanB -- 2018-01-25 19:01:24
 it exits both client and server now. project is doneeeee
 
 brianLbayanB -- 2018-01-25 19:54:34
@@ -124,4 +134,7 @@ more than 2 players allowed
 
 limB -- 2018-01-25 20:31:13
 every player can only answer once per question ; question is skipped if players fail to answer
+
+bayanB -- 2018-01-25 23:05:36
+fixed up the readme file, and filled in the devlog zone of reflection
 
