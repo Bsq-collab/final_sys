@@ -52,26 +52,7 @@ After all clients (n) have connected to the server and signed in with their name
 
 ### Running on Multiple Machines
 
-Follow the above instructions to clone and make
-
-```
-$ git clone git@github.com:bberri1205/final_sys.git
-Cloning into 'final_sys'...
-remote: Counting objects: 360, done.
-remote: Compressing objects: 100% (134/134), done.
-remote: Total 360 (delta 132), reused 116 (delta 60), pack-reused 165
-Receiving objects: 100% (360/360), 77.46 KiB | 0 bytes/s, done.
-Resolving deltas: 100% (223/223), done.
-Checking connectivity... done.
-$ cd final_sys/
-
-$ make
-gcc -g -c start_screen.c select_client.c
-gcc -g -c networking.c
-gcc -g -o client select_client.o networking.o
-gcc -g -c start_screen.c select_server.c
-gcc -g -o server select_server.o networking.o\
-```
+Follow the above instructions to clone and make.
 Then, run the server one machine. Again, pass the number of desired clients as an argument. The default is 2.
 
 ```
