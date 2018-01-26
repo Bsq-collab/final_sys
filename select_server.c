@@ -20,6 +20,7 @@ int main(int argc, char ** argv) {
   }
   int listen_socket;
   int i;
+  int j;
   int client_count = 0;
   char buffer[BUFFER_SIZE];
   char ans_buf[BUFFER_SIZE];
@@ -32,6 +33,9 @@ int main(int argc, char ** argv) {
   for ( i=0 ; i<num_players ; i++ ) {
     names[i] = (char *)calloc(BUFFER_SIZE, sizeof(char));
   }
+  // int tried[num_players];
+  // memset(tried, 0, num_players);
+  int * tried = (int *)calloc(num_players, sizeof(int));
 
 
   int ready = 0;
@@ -124,15 +128,33 @@ int main(int argc, char ** argv) {
             sscanf(ans_buf,"%d\n",&answer_user);
 
 
-            if(answer_user==atoi(parsed_key[current_question])){
+            if(!tried[i] && answer_user==atoi(parsed_key[current_question])){
               strcpy(buffer, "GOOD WOORK\n");
               broadcast(client_socket,num_players, buffer,sizeof(buffer),points,(char **)names);
               points[i]+=109;
               current_question+=1;
               answer_user=-1;
+              for ( j=0 ; j<num_players ; j++ ){
+                tried[j] = 0;
+              }
             }
             else{
+              tried[i] = 1;
               printf("YOU WRONGO BRO");
+              int fail = 1;
+              for ( j=0 ; j<num_players ; j++ ){
+                if (tried[j] == 0) {
+                  fail = 0;
+                }
+              }
+              if (fail) {
+                printf("@@\n");
+                current_question++;
+                answer_user=-1;
+                for ( j=0 ; j<num_players ; j++ ){
+                  tried[j] = 0;
+                }
+              }
             }
             strcpy(buffer, questions[current_question]);
             broadcast(client_socket, num_players, buffer, sizeof(buffer),points,(char **)names);
@@ -143,7 +165,6 @@ int main(int argc, char ** argv) {
           if (current_question == 10) {
             int max = 0;
             int max_player = 0;
-            int j;
             for ( j=0 ; j<num_players ; j++ ) {
               if (points[j] > max){
                 max = points[j];

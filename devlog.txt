@@ -122,3 +122,6 @@ it exits both client and server now. project is doneeeee
 brianLbayanB -- 2018-01-25 19:54:34
 more than 2 players allowed
 
+limB -- 2018-01-25 20:31:13
+every player can only answer once per question ; question is skipped if players fail to answer
+
