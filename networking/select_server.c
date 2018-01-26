@@ -5,6 +5,8 @@
 void die(int * client_socket) {
   int i;
   for ( i=0 ; i<NUM_PLAYERS ; i++ ) {
+    char buf[256] = "cyalater";
+    write(client_socket[i], buf, sizeof(buf));
     close(client_socket[i]);
     shutdown(client_socket[i],2);
   }

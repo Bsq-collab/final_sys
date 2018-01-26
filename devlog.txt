@@ -116,3 +116,6 @@ FINALLY CORRECT ANSWER PRINTS CORRECT AND MOVES ON TO NEXT Q. INCORRECT ANSWER R
 brianLbayanB -- 2018-01-25 18:43:08
 started to incorporate the points system to match with the player's names. After many segfaults we figured out how to broadcast the points on each question. after a player gets a questoin right it moves on to the next question. if they get it wrong it reprints that question. after 10 questions the user with most points is declared the winner. only thing that doesnt work is closing the clients.
 
+brianLbayanB -- 2018-01-25 19:01:24
+it exits both client and server now. project is doneeeee
+

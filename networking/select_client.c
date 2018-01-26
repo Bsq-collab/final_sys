@@ -53,6 +53,9 @@ int main(int argc, char **argv) {
     //this would allow for broadcast messages
     if (FD_ISSET(server_socket, &read_fds)) {
       read(server_socket, buffer, sizeof(buffer));
+      if (!strcmp(buffer,"cyalater")) {
+        exit(0);
+      }
       printf("[SERVER BROADCAST] %s\n", buffer);
       printf("enter data: ");
       //the above printf does not have \n
