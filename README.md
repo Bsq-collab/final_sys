@@ -53,4 +53,7 @@ hello 4
 
 After all clients (n) have connected to the server and signed in with their names they are prompted with science questions and whoever answers the most correctly first wins the game. they are all multiple choice questions and the answer you input has to be 1, 2, 3, or 4. Failure to do so means you don't get the points! Each player gets one try per question to avoid cheating. players get 109 points for answering a question correctly.
 
+### Documentation 
+Most of our documentation can be found in our textfile titled fxns.txt
+
 
