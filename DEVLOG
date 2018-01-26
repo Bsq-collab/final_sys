@@ -129,7 +129,7 @@ started to incorporate the points system to match with the player's names. After
 brianL bayanB -- 2018-01-25 19:01:24
 it exits both client and server now. project is doneeeee
 
-brianLbayanB -- 2018-01-25 19:54:34
+brianL bayanB -- 2018-01-25 19:54:34
 more than 2 players allowed
 
 limB -- 2018-01-25 20:31:13
@@ -138,3 +138,5 @@ every player can only answer once per question ; question is skipped if players 
 bayanB -- 2018-01-25 23:05:36
 fixed up the readme file, and filled in the devlog zone of reflection
 
+bayanB -- 2018-01-25 23:22:56
+fixed small print error on number 7. weird character or something.
