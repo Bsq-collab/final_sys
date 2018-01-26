@@ -2,9 +2,9 @@
 #include "final.h"
 #include "start_screen.c"
 
-void die(int * client_socket) {
+void die(int * client_socket, int num_players) {
   int i;
-  for ( i=0 ; i<NUM_PLAYERS ; i++ ) {
+  for ( i=0 ; i<num_players ; i++ ) {
     char buf[256] = "cyalater";
     write(client_socket[i], buf, sizeof(buf));
     close(client_socket[i]);
@@ -13,19 +13,23 @@ void die(int * client_socket) {
   exit(0);
 }
 
-int main() {
+int main(int argc, char ** argv) {
+  int num_players = 2;
+  if (argc == 2) {
+    num_players = atoi(argv[1]);
+  }
   int listen_socket;
   int i;
   int client_count = 0;
   char buffer[BUFFER_SIZE];
   char ans_buf[BUFFER_SIZE];
 
-  // char names[NUM_PLAYERS][BUFFER_SIZE];
-  // for ( i=0 ; i<NUM_PLAYERS ; i++ ) {
+  // char names[num_players][BUFFER_SIZE];
+  // for ( i=0 ; i<num_players ; i++ ) {
   //   memset(names[i], 0, BUFFER_SIZE);
   // }
-  char *names[NUM_PLAYERS];
-  for ( i=0 ; i<NUM_PLAYERS ; i++ ) {
+  char *names[num_players];
+  for ( i=0 ; i<num_players ; i++ ) {
     names[i] = (char *)calloc(BUFFER_SIZE, sizeof(char));
   }
 
@@ -52,10 +56,8 @@ int main() {
   int current_question=0;
   int current_answer=0;
 
-  int client_socket[NUM_PLAYERS];
-  int points[NUM_PLAYERS];
-  memset(client_socket, 0, NUM_PLAYERS);
-  memset(points, 0, NUM_PLAYERS);
+  int *client_socket = calloc(num_players, sizeof(int));
+  int *points = calloc(num_players, sizeof(int));
 
   listen_socket = server_setup();
   int fdmax = listen_socket;
@@ -89,7 +91,7 @@ int main() {
     if (FD_ISSET(STDIN_FILENO, &read_fds)) {
       //if you don't read from stdin, it will continue to trigger select()
       fgets(buffer, BUFFER_SIZE, stdin);
-      die(client_socket);
+      die(client_socket, num_players);
     }//end stdin select
 
     //if a client triggered select
@@ -104,16 +106,16 @@ int main() {
             write(client_socket[i], buffer, sizeof(buffer));
 
             ready = 1;
-            for ( i=0 ; i<NUM_PLAYERS ; i++ ) {
+            for ( i=0 ; i<num_players ; i++ ) {
               if ( !strcmp(names[i],"") ) ready = 0;
             }
             if(ready){
               strcpy(buffer, questions[current_question]);
 
-              broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer),points, (char **)names);
+              broadcast(client_socket, num_players, buffer, sizeof(buffer),points, (char **)names);
               strcpy(buffer, answers[current_question]);
 
-              broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer),points,(char **)names);
+              broadcast(client_socket, num_players, buffer, sizeof(buffer),points,(char **)names);
               strcpy(ans_buf, parsed_key[current_question]);
             }
           }
@@ -124,7 +126,7 @@ int main() {
 
             if(answer_user==atoi(parsed_key[current_question])){
               strcpy(buffer, "GOOD WOORK\n");
-              broadcast(client_socket,NUM_PLAYERS, buffer,sizeof(buffer),points,(char **)names);
+              broadcast(client_socket,num_players, buffer,sizeof(buffer),points,(char **)names);
               points[i]+=109;
               current_question+=1;
               answer_user=-1;
@@ -133,24 +135,24 @@ int main() {
               printf("YOU WRONGO BRO");
             }
             strcpy(buffer, questions[current_question]);
-            broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer),points,(char **)names);
+            broadcast(client_socket, num_players, buffer, sizeof(buffer),points,(char **)names);
 
             strcpy(buffer, answers[current_question]);
-            broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer),points,(char **)names);
+            broadcast(client_socket, num_players, buffer, sizeof(buffer),points,(char **)names);
           }
           if (current_question == 10) {
             int max = 0;
             int max_player = 0;
             int j;
-            for ( j=0 ; j<NUM_PLAYERS ; j++ ) {
+            for ( j=0 ; j<num_players ; j++ ) {
               if (points[j] > max){
                 max = points[j];
                 max_player = j;
               }
             }
             sprintf(buffer, "AND THE WINNER IS: %s\n", names[max_player]);
-            broadcast(client_socket, NUM_PLAYERS, buffer, sizeof(buffer),points,(char **)names);
-            die(client_socket);
+            broadcast(client_socket, num_players, buffer, sizeof(buffer),points,(char **)names);
+            die(client_socket, num_players);
           }
         }
       }

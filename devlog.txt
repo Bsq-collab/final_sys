@@ -119,3 +119,6 @@ started to incorporate the points system to match with the player's names. After
 brianLbayanB -- 2018-01-25 19:01:24
 it exits both client and server now. project is doneeeee
 
+brianLbayanB -- 2018-01-25 19:54:34
+more than 2 players allowed
+
